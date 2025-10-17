@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IT Powers Play</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f9f9f9;
+      color: #222;
+      scroll-behavior: smooth;
+    }
+
+    header.hero {
+      text-align: center;
+      padding: 100px 20px 80px;
+      background: white;
+      border-bottom: 3px solid #4e54c8;
+    }
+    header.hero h1 {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 2rem;
+      color: #4e54c8;
+      margin-bottom: 15px;
+    }
+    header.hero p {
+      color: #555;
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      background-color: #fff;
+      border-bottom: 1px solid #ddd;
+      padding: 12px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    nav a {
+      text-decoration: none;
+      color: #4e54c8;
+      font-weight: 600;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    section { padding: 80px 20px; text-align: center; }
+    section h2 {
+      font-family: 'Press Start 2P', monospace;
+      color: #4e54c8;
+      font-size: 1.6rem;
+      margin-bottom: 30px;
+    }
+
+    /* --- Game Section --- */
+    .game-section { 
+      position: relative; /* <-- added */
+      background: #fff;
+      border: 2px solid #4e54c8;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      padding: 40px 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    #gameCanvas {
+      width: 100%;
+      max-width: 800px;
+      height: 200px;
+      border: 2px solid #4e54c8;
+      border-radius: 8px;
+      display: block;
+      margin: 0 auto;
+      background-color: #fff;
+    }
+    .game-instructions { margin-top: 10px; color: #666; }
+
+    .hud { margin-top: 12px; color:#444; font-weight:600; }
+
+    details {
+      margin-top: 20px;
+      text-align: left;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      background: #fafafa;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 15px;
+    }
+    details summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: #4e54c8;
+    }
+    details p { margin-top: 10px; color: #444; }
+
+    .tools-gallery {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    .tools-gallery img { width: 60px; height: 60px; object-fit: contain; }
+
+    /* --- Role Cards --- */
+    .role-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .role-card {
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .role-card:hover { transform: scale(1.02); box-shadow: 0 6px 14px rgba(0,0,0,0.1); }
+    .role-card img { width: 100%; height: 220px; object-fit: cover; border-bottom: 2px solid #4e54c8; }
+    .role-card h3 { margin: 15px 0 10px; color: #4e54c8; font-size: 1.2rem; }
+    .role-card p { color: #555; padding: 0 20px 25px; font-size: 0.95rem; }
+
+    /* --- Timeline --- */
+    .timeline {
+      background: #fff;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      position: relative;
+      overflow: visible;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 4px;
+      height: 100%;
+      background: #4e54c8;
+      transform: translateX(-50%);
+    }
+
+    .timeline-item {
+      width: 100%;
+      margin-bottom: 50px;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      white-space: normal;
+    }
+
+    .timeline-item:nth-child(odd) {
+      flex-direction: row-reverse;
+    }
+
+    .timeline-content {
+      width: 45%;
+      padding: 20px;
+      background: white;
+      border: 2px solid #4e54c8;
+      border-radius: 12px;
+      position: relative;
+      transform: translateX(20px);
+      transition: transform 0.3s ease;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-content {
+      transform: translateX(-20px);
+    }
+
+    .timeline-content:hover {
+      transform: translateX(10px);
+      box-shadow: 0 5px 15px rgba(78, 84, 200, 0.2);
+    }
+
+    .timeline-item:nth-child(odd) .timeline-content:hover {
+      transform: translateX(-10px);
+    }
+
+    .timeline-content::before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      right: -37px;
+      width: 35px;
+      height: 4px;
+      background: #4e54c8;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-content::before {
+      left: -37px;
+      right: auto;
+    }
+
+    .timeline-content::after {
+      content: '';
+      position: absolute;
+      top: 12px;
+      right: -44px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #ef233c;
+      border: 4px solid #4e54c8;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-content::after {
+      left: -44px;
+      right: auto;
+    }
+
+    .timeline-item h3 {
+      color: #ef233c;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 1rem;
+      margin-bottom: 15px;
+    }
+
+    .timeline-item p {
+      font-size: 0.95rem;
+      color: #444;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 768px) {
+      .timeline::before {
+        left: 30px;
+      }
+      
+      .timeline-item {
+        flex-direction: row !important;
+        justify-content: flex-start;
+      }
+      
+      .timeline-content {
+        width: calc(100% - 60px);
+        margin-left: 60px;
+        transform: translateX(0) !important;
+      }
+      
+      .timeline-content::before {
+        left: -37px;
+        right: auto !important;
+      }
+      
+      .timeline-content::after {
+        left: -44px;
+        right: auto !important;
+      }
+    }
+
+    /* --- Learn Section --- */
+    .starter-links a {
+      display: inline-block;
+      margin: 10px;
+      background-color: #4e54c8;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .starter-links a:hover { background-color: #5bc0be; }
+
+    /* --- Join Section --- */
+    #join {
+      background: #fff;
+      border: 2px solid #4e54c8;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 50px 20px;
+    }
+    #join p { color: #444; margin-top: 10px; }
+    .cta {
+      display: inline-block;
+      margin-top: 25px;
+      background-color: #4e54c8;
+      color: #fff;
+      padding: 12px 25px;
+      font-weight: 700;
+      border-radius: 25px;
+      text-decoration: none;
+    }
+    .cta:hover { background-color: #5bc0be; color: #fff; }
+
+    footer {
+      text-align: center;
+      font-size: 0.85rem;
+      padding: 20px;
+      color: #888;
+      background: #f9f9f9;
+      margin-top: 60px;
+    }
+
+    /* ensure overlay sits inside game section */
+    #gameOverScreen {
+      position: absolute; /* changed from fixed */
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      background: rgba(0,0,0,0.5);
+      z-index: 50;
+      pointer-events: none; /* disable pointer events when hidden */
+    }
+    /* when visible allow interaction */
+    #gameOverScreen.show {
+      display: flex;
+      pointer-events: auto;
+    }
+
+    .overlay {
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      text-align: center;
+      font-family: 'Press Start 2P', monospace;
+      color: #222;
+      z-index: 60;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <h1>IT Powers Play</h1>
+    <p>Where innovation meets imagination — explore how Information Technology fuels entertainment.</p>
+  </header>
+
+  <nav>
+    <a href="#game">Game</a>
+    <a href="#roles">Roles</a>
+    <a href="#timeline">Timeline</a>
+    <a href="#learn">Learn</a>
+    <a href="#join">Join</a>
+  </nav>
+
+  <!-- Game Section -->
+  <section id="game">
+    <h2>Let-Run with IT</h2>
+    <div class="game-section">
+      <canvas id="gameCanvas" width="800" height="200" aria-label="Simple runner game"></canvas>
+      <p class="game-instructions">Press SPACE to jump. Avoid bugs — just like debugging code!</p>
+
+      <div class="hud">
+        Score: <span id="hudScore">0</span> — High score: <span id="highScore">0</span>
+      </div>
+
+      <details>
+        <summary>🎓 Behind the Code</summary>
+        <p>This pixel runner uses <strong>JavaScript</strong> for logic, <strong>HTML5 Canvas</strong> for visuals, and a continuous <strong>game loop</strong> to keep things moving. IT makes entertainment interactive — from physics and collisions to real-time animation.</p>
+      </details>
+
+      <div class="tools-gallery">
+        <img src="assets/vscode.png" alt="VS Code">
+        <img src="assets/html.png" alt="HTML">
+        <img src="assets/css.png" alt="CSS">
+        <img src="assets/js.png" alt="JavaScript">
+        <img src="assets/resprite.png" alt="Resprite">
+      </div>
+
+      <!-- MOVED: Game overlay placed inside .game-section so it covers only the game block -->
+      <div id="gameOverScreen" aria-hidden="true">
+        <div class="overlay">
+          <h2>Game Over</h2>
+          <p>Your score: <span id="finalScore">0</span></p>
+          <button id="restartBtn">Restart</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Role Highlights -->
+  <section id="roles">
+    <h2>IT in Entertainment</h2>
+    <p>Behind every immersive world and engaging story are IT professionals who blend logic, design, and innovation.</p>
+
+    <div class="role-grid">
+      <div class="role-card">
+        <img src="https://images.unsplash.com/photo-1605902711622-cfb43c4437d1" alt="Game Developer">
+        <h3>Game Developer 🎮</h3>
+        <p>Transforms code into fun. Game developers create the logic, physics, and mechanics that make virtual worlds come alive — the heart of digital entertainment.</p>
+      </div>
+
+      <div class="role-card">
+        <img src="https://images.unsplash.com/photo-1581090700227-1e37b190418e" alt="3D Artist">
+        <h3>3D Artist 🧑‍🎨</h3>
+        <p>Designs characters, environments, and effects. Using IT tools like Blender and Photoshop, they turn imagination into visual storytelling.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline -->
+  <section id="timeline">
+    <h2>How IT Transformed Play</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <h3>1972</h3>
+          <p>Pong launches the video game revolution, introducing simple yet addictive digital entertainment. This marks the beginning of IT's crucial role in gaming.</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <h3>1990s</h3>
+          <p>The rise of the internet revolutionizes gaming through LAN parties and early online multiplayer. Games like DOOM and Quake showcase networking's potential in entertainment.</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <h3>2007</h3>
+          <p>The iPhone debuts, transforming phones into gaming devices. Mobile development explodes, making games accessible to billions and creating new career opportunities.</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <h3>2020s</h3>
+          <p>AI and Virtual Reality reshape gaming experiences. Machine learning powers NPCs, procedural generation creates infinite worlds, and VR delivers unprecedented immersion.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Learn Section -->
+  <section id="learn">
+    <h2>Learn & Build</h2>
+    <p>Start your IT adventure — explore, create, and innovate in entertainment technology.</p>
+    <div class="starter-links">
+      <a href="https://developer.mozilla.org/en-US/docs/Games" target="_blank">🎮 Game Dev Basics</a>
+      <a href="https://www.blender.org/" target="_blank">🧑‍🎨 3D Design Tools</a>
+      <a href="https://mimo.org/" target="_blank">💻 Learn to Code</a>
+      <a href="https://itch.io/game-assets/free" target="_blank">🪄 Free Game Assets</a>
+    </div>
+  </section>
+
+  <!-- Join Section -->
+  <section id="join">
+    <h2>Join the Movement</h2>
+    <p>Technology fuels entertainment — and IT fuels technology. Try the game, explore the roles, and imagine what you could create.</p>
+    <a href="#game" class="cta">Level Up Your Future — Choose IT!</a>
+  </section>
+
+  <footer>
+    © 2025 IT Powers Play | Designed to Inspire Future Innovators
+  </footer>
+
+  <!-- Game Script (complete) -->
+  <script>
+    // ======== GAME SYSTEM ======== //
+    // Includes intro screen, scaling, asset fallbacks, and smooth restart.
+
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    ctx.imageSmoothingEnabled = false;
+
+    // --- Logical canvas size ---
+    const LOGICAL_WIDTH = 800;
+    const LOGICAL_HEIGHT = 200;
+
+    // --- Game States ---
+    const STATE = {
+      INTRO: 'intro',
+      PLAYING: 'playing',
+      GAME_OVER: 'gameover'
+    };
+    let currentState = STATE.INTRO;
+
+    // --- Game Variables ---
+    let score = 0;
+    let highScore = 0;
+    let frameCount = 0;
+    let obstacles = [];
+    let gameSpeed = 2.5;
+    const MAX_GAME_SPEED = 12;
+    const SPEED_INCREASE_RATE = 0.001;
+    let gameLoopId = null;
+
+    // --- DOM Elements ---
+    const gameOverScreen = document.getElementById('gameOverScreen');
+    const finalScoreEl = document.getElementById('finalScore');
+    const highScoreEl = document.getElementById('highScore');
+    const restartBtn = document.getElementById('restartBtn');
+    const hudScore = document.getElementById('hudScore');
+
+    // --- Player ---
+    const player = {
+      x: 50,
+      y: 150,
+      width: 32,
+      height: 32,
+      velocityY: 0,
+      gravity: 0.8,
+      jumpPower: -12,
+      grounded: true
+    };
+
+    // --- Assets ---
+    const playerImg = new Image();
+    playerImg.src = 'assets/player.png';
+    const bugImg = new Image();
+    bugImg.src = 'assets/bug.png';
+
+    // --- Canvas Scaling ---
+    function resizeCanvasForDPR() {
+      const dpr = window.devicePixelRatio || 1;
+      const cssWidth = canvas.clientWidth || LOGICAL_WIDTH;
+      const cssHeight = canvas.clientHeight || LOGICAL_HEIGHT;
+      canvas.width = Math.round(cssWidth * dpr);
+      canvas.height = Math.round(cssHeight * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    window.addEventListener('resize', resizeCanvasForDPR);
+    window.addEventListener('load', resizeCanvasForDPR);
+
+    // --- Asset Loader ---
+    const loadImage = img => new Promise(resolve => {
+      img.onload = () => resolve(true);
+      img.onerror = () => resolve(false);
+    });
+
+    // --- Draw Functions ---
+    function drawPlayer() {
+      if (playerImg.complete && playerImg.naturalWidth) {
+        ctx.drawImage(playerImg, player.x, player.y, player.width, player.height);
+      } else {
+        ctx.fillStyle = '#4e54c8';
+        ctx.fillRect(player.x, player.y, player.width, player.height);
+      }
+    }
+
+    function drawObstacles() {
+      for (const ob of obstacles) {
+        if (bugImg.complete && bugImg.naturalWidth) {
+          ctx.drawImage(bugImg, ob.x, ob.y, ob.width, ob.height);
+        } else {
+          ctx.fillStyle = '#ef233c';
+          ctx.fillRect(ob.x, ob.y, ob.width, ob.height);
+        }
+      }
+    }
+
+    // --- Update Functions ---
+    function updatePlayer() {
+      player.velocityY += player.gravity;
+      player.y += player.velocityY;
+
+      if (player.y >= 150) {
+        player.y = 150;
+        player.velocityY = 0;
+        player.grounded = true;
+      }
+    }
+
+    function spawnObstacle() {
+      obstacles.push({
+        x: LOGICAL_WIDTH,
+        y: 160,
+        width: 20,
+        height: 20,
+        speed: gameSpeed + Math.random() * 1.2,
+        scored: false
+      });
+    }
+
+    function updateObstacles() {
+      for (let i = 0; i < obstacles.length; i++) {
+        const ob = obstacles[i];
+        ob.x -= ob.speed;
+
+        // Score when obstacle passes player
+        if (!ob.scored && ob.x + ob.width < player.x) {
+          score++;
+          ob.scored = true;
+          if (score > highScore) {
+            highScore = score;
+            highScoreEl.textContent = highScore;
+          }
+          hudScore.textContent = score;
+        }
+
+        // Collision detection
+        if (
+          player.x < ob.x + ob.width &&
+          player.x + player.width > ob.x &&
+          player.y < ob.y + ob.height &&
+          player.y + player.height > ob.y
+        ) {
+          endGame();
+          return;
+        }
+      }
+
+      obstacles = obstacles.filter(o => o.x + o.width > -50);
+    }
+
+    // --- UI ---
+    function drawScore() {
+      ctx.font = "16px 'Press Start 2P', monospace";
+      ctx.fillStyle = "#222";
+      ctx.fillText(`Score: ${score}`, 8, 18);
+    }
+
+    function drawIntroScreen() {
+      ctx.clearRect(0, 0, LOGICAL_WIDTH, LOGICAL_HEIGHT);
+      ctx.font = "20px 'Press Start 2P', monospace";
+      ctx.fillStyle = "#4e54c8";
+      ctx.textAlign = "center";
+      ctx.fillText("THE DEBUG RUN", LOGICAL_WIDTH / 2, 80);
+
+      ctx.font = "12px 'Press Start 2P', monospace";
+      ctx.fillStyle = "#333";
+      ctx.fillText("Press SPACE to Start", LOGICAL_WIDTH / 2, 130);
+    }
+
+    function showGameOver() {
+      gameOverScreen.classList.add('show');
+      gameOverScreen.setAttribute('aria-hidden', 'false');
+    }
+
+    function hideGameOver() {
+      gameOverScreen.classList.remove('show');
+      gameOverScreen.setAttribute('aria-hidden', 'true');
+    }
+
+    // --- Game Flow ---
+    function endGame() {
+      if (gameLoopId) cancelAnimationFrame(gameLoopId);
+      gameLoopId = null;
+      currentState = STATE.GAME_OVER;
+      if (score > highScore) highScore = score;
+      finalScoreEl.textContent = score;
+      highScoreEl.textContent = highScore;
+      hudScore.textContent = score;
+      showGameOver();
+    }
+
+    function gameLoop() {
+      if (currentState !== STATE.PLAYING) return;
+
+      ctx.clearRect(0, 0, LOGICAL_WIDTH, LOGICAL_HEIGHT);
+
+      gameSpeed = Math.min(MAX_GAME_SPEED, gameSpeed + SPEED_INCREASE_RATE);
+
+      updatePlayer();
+      drawPlayer();
+
+      frameCount++;
+      if (frameCount % 90 === 0) spawnObstacle();
+
+      updateObstacles();
+      drawObstacles();
+      drawScore();
+
+      gameLoopId = requestAnimationFrame(gameLoop);
+    }
+
+    function startGame() {
+      resizeCanvasForDPR();
+      score = 0;
+      frameCount = 0;
+      obstacles = [];
+      player.y = 150;
+      player.velocityY = 0;
+      player.grounded = true;
+      gameSpeed = 2.5;
+      currentState = STATE.PLAYING;
+      hideGameOver(); // <-- use class-based hide
+      hudScore.textContent = score;
+      if (gameLoopId) cancelAnimationFrame(gameLoopId);
+      gameLoopId = requestAnimationFrame(gameLoop);
+    }
+
+    function restartGame() {
+      if (gameLoopId) cancelAnimationFrame(gameLoopId);
+      startGame();
+    }
+
+    // --- Controls ---
+    document.addEventListener('keydown', e => {
+      if (e.code === 'Space') {
+        e.preventDefault();
+
+        if (currentState === STATE.INTRO) {
+          startGame();
+        } else if (currentState === STATE.PLAYING && player.grounded) {
+          player.velocityY = player.jumpPower;
+          player.grounded = false;
+        } else if (currentState === STATE.GAME_OVER) {
+          restartGame();
+        }
+      }
+    }, { passive: false });
+
+    restartBtn.addEventListener('click', restartGame);
+
+    // --- Load and Initialize ---
+    Promise.race([
+      Promise.all([loadImage(playerImg), loadImage(bugImg)]),
+      new Promise(resolve => setTimeout(resolve, 2500))
+    ]).then(() => {
+      resizeCanvasForDPR();
+      drawIntroScreen();
+      // populate HUD
+      hudScore.textContent = score;
+      highScoreEl.textContent = highScore;
+    });
+  </script>
+
+</body>
+</html>
