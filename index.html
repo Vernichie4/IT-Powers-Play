@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IT Powers Play</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style_m.css" />
+
+</head>
+<body>
+
+  <header class="hero">
+    <h1>IT Powers Play</h1>
+    <p>Where innovation meets imagination — explore how Information Technology fuels entertainment.</p>
+  </header>
+
+  <nav>
+    <a href="#game">Game</a>
+    <a href="#roles">Roles</a>
+    <a href="#timeline">Timeline</a>
+    <a href="#learn">Learn</a>
+    <a href="#join">Join</a>
+  </nav>
+
+  <!-- Game Section -->
+  <section id="game">
+    <h2>Let-Run with IT</h2>
+    <div class="game-section">
+      <canvas id="gameCanvas" width="800" height="200" aria-label="Simple runner game"></canvas>
+      <p class="game-instructions">Press SPACE to jump. Avoid bugs — just like debugging code!</p>
+
+      <div class="hud" aria-live="polite">
+        Score: <span id="hudScore">0</span> — High score: <span id="highScore">0</span>
+      </div>
+
+      <details>
+        <summary>🎓 Behind the Code</summary>
+        <p>This pixel runner uses <strong>JavaScript</strong> for logic, <strong>HTML5 Canvas</strong> for visuals, and a continuous <strong>game loop</strong> to keep things moving. IT makes entertainment interactive — from physics and collisions to real-time animation.</p>
+      </details>
+
+      <div class="tools-gallery">
+        <img src="assets/vscode.png" alt="VS Code">
+        <img src="assets/html.png" alt="HTML">
+        <img src="assets/css.png" alt="CSS">
+        <img src="assets/js.png" alt="JavaScript">
+        <img src="assets/resprite.png" alt="Resprite">
+      </div>
+
+      <!-- Game overlay placed inside .game-section so it covers only the game block -->
+      <div id="gameOverScreen" aria-hidden="true">
+        <div class="overlay">
+          <h2>Game Over</h2>
+          <p>Your score: <span id="finalScore">0</span></p>
+          <button id="restartBtn">Restart</button>
+        </div>
+      </div>
+
+      <!-- On-screen touch Jump button (added by JS if needed) -->
+    </div>
+  </section>
+
+  <!-- Role Highlights -->
+  <section id="roles">
+  <h2>IT in Entertainment</h2>
+  <p>Behind every immersive world and engaging story are IT professionals who blend logic, design, and innovation.</p>
+
+  <article class="role-article">
+    <header>
+      <h3>Game Developer 🎮</h3>
+      <p class="role-lead">Builds the systems and rules that make play possible — from player controls to AI and networking.</p>
+    </header>
+
+    <figure class="role-media">
+      <img src="assets/game_developer.jpg" alt="Game Developer at work">
+    </figure>
+
+    <div class="role-body">
+      <p><strong>What they do</strong> — design and implement gameplay systems, physics, UI, and game logic. They translate design goals into performant code that runs across devices.</p>
+
+      <p><strong>Core skills</strong> — programming (C#, C++, JavaScript), game engines (Unity, Unreal), debugging, data-driven design, and familiarity with math for movement and collisions.</p>
+
+      <p><strong>Day-to-day</strong> — prototype mechanics, write and review code, optimize performance, integrate assets, and collaborate with artists, designers, and QA to iterate quickly.</p>
+
+      <p><strong>How to get started</strong> — make small prototypes, follow engine tutorials, join game jams, read postmortems, and build a focused portfolio that highlights rule systems and polish.</p>
+
+      <p><strong>Helpful tools</strong> — Unity; Unreal Engine; Git; VS Code or Visual Studio; performance profilers; simple physics libraries.</p>
+    </div>
+  </article>
+
+  <hr>
+
+  <article class="role-article">
+    <header>
+      <h3>3D Artist 🧑‍🎨</h3>
+      <p class="role-lead">Creates the characters, environments, and visual polish that give games personality and atmosphere.</p>
+    </header>
+
+    <figure class="role-media">
+      <img src="assets/3D_Artist.jpg" alt="3D Artist creating assets">
+    </figure>
+
+    <div class="role-body">
+      <p><strong>What they do</strong> — model, texture, rig, and light scenes and characters. They move concepts from 2D sketches into optimized 3D assets ready for real-time use.</p>
+
+      <p><strong>Core skills</strong> — 3D modeling, UV unwrapping, texturing, sculpting, basic rigging, shading, and an eye for composition and color.</p>
+
+      <p><strong>Day-to-day</strong> — iterate on concept art, sculpt or model, bake textures, import into engine, fix shading and LOD issues, and work with developers to ensure assets run smoothly in-game.</p>
+
+      <p><strong>How to get started</strong> — practice with Blender or other DCC tools, study anatomy and lighting, follow asset pipelines, build a portfolio of game-ready models, and participate in asset packs or collaborations.</p>
+
+      <p><strong>Helpful tools</strong> — Blender; Substance Painter; ZBrush or Sculptris; Photoshop; engine import pipelines for Unity/Unreal; texture baker tools.</p>
+    </div>
+  </article>
+  </section>
+
+
+  <!-- Timeline -->
+  <section id="timeline">
+    <h2>How IT Transformed Play</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <h3>1972</h3>
+          <p>Pong launches the video game revolution, introducing simple yet addictive digital entertainment. This marks the beginning of IT's crucial role in gaming.</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <h3>1990s</h3>
+          <p>The rise of the internet revolutionizes gaming through LAN parties and early online multiplayer. Games like DOOM and Quake showcase networking's potential in entertainment.</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <h3>2007</h3>
+          <p>The iPhone debuts, transforming phones into gaming devices. Mobile development explodes, making games accessible to billions and creating new career opportunities.</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <h3>2020s</h3>
+          <p>AI and Virtual Reality reshape gaming experiences. Machine learning powers NPCs, procedural generation creates infinite worlds, and VR delivers unprecedented immersion.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Learn Section -->
+  <section id="learn">
+    <h2>Learn & Build</h2>
+    <p>Start your IT adventure — explore, create, and innovate in entertainment technology.</p>
+    <div class="starter-links">
+      <a href="https://developer.mozilla.org/en-US/docs/Games" target="_blank">🎮 Game Dev Basics</a>
+      <a href="https://www.blender.org/" target="_blank">🧑‍🎨 3D Design Tools</a>
+      <a href="https://mimo.org/" target="_blank">💻 Learn to Code</a>
+      <a href="https://itch.io/game-assets/free" target="_blank">🪄 Free Game Assets</a>
+    </div>
+  </section>
+
+  <!-- Join Section -->
+  <section id="join">
+    <h2>Join the Movement</h2>
+    <p>Technology fuels entertainment — and IT fuels technology. Try the game, explore the roles, and imagine what you could create.</p>
+    <a href="#game" class="cta">Level Up Your Future — Choose IT!</a>
+  </section>
+
+  <footer>
+    © 2025 IT Powers Play | Designed to Inspire Future Innovators
+  </footer>
+
+  <!-- Game Script (patched) -->
+  <script>
+    // ======== GAME SYSTEM ======== //
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    ctx.imageSmoothingEnabled = false;
+
+    // Logical canvas size
+    const LOGICAL_WIDTH = 800;
+    const LOGICAL_HEIGHT = 200;
+
+    // Game States
+    const STATE = { INTRO: 'intro', PLAYING: 'playing', GAME_OVER: 'gameover' };
+    let currentState = STATE.INTRO;
+
+    // Game Variables
+    let score = 0;
+    let highScore = 0;
+    let frameCount = 0;
+    let obstacles = [];
+    let gameSpeed = 2.5;
+    const MAX_GAME_SPEED = 12;
+    const SPEED_INCREASE_RATE = 0.001;
+    let gameLoopId = null;
+
+    // DOM Elements
+    const gameOverScreen = document.getElementById('gameOverScreen');
+    const finalScoreEl = document.getElementById('finalScore');
+    const highScoreEl = document.getElementById('highScore');
+    const restartBtn = document.getElementById('restartBtn');
+    const hudScore = document.getElementById('hudScore');
+
+    // Player
+    const player = {
+      x: 50,
+      y: 150,
+      width: 32,
+      height: 32,
+      velocityY: 0,
+      gravity: 0.8,
+      jumpPower: -12,
+      grounded: true
+    };
+
+    // Assets
+    const playerImg = new Image();
+    playerImg.src = 'assets/player.png';
+    const bugImg = new Image();
+    bugImg.src = 'assets/bug.png';
+
+    // Hitbox padding (fairer collisions)
+    const HIT_PAD = { x: 4, y: 4 };
+
+    // Canvas scaling
+    function resizeCanvasForDPR() {
+      const dpr = window.devicePixelRatio || 1;
+      const cssWidth = canvas.clientWidth || LOGICAL_WIDTH;
+      const cssHeight = canvas.clientHeight || LOGICAL_HEIGHT;
+      canvas.width = Math.round(cssWidth * dpr);
+      canvas.height = Math.round(cssHeight * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    window.addEventListener('resize', resizeCanvasForDPR);
+    window.addEventListener('load', resizeCanvasForDPR);
+
+    // Asset loader
+    const loadImage = img => new Promise(resolve => {
+      img.onload = () => resolve(true);
+      img.onerror = () => resolve(false);
+    });
+
+    // Draw functions
+    function drawPlayer() {
+      if (playerImg.complete && playerImg.naturalWidth) {
+        ctx.drawImage(playerImg, player.x, player.y, player.width, player.height);
+      } else {
+        ctx.fillStyle = '#4e54c8';
+        ctx.fillRect(player.x, player.y, player.width, player.height);
+      }
+    }
+
+    function drawObstacles() {
+      for (const ob of obstacles) {
+        if (bugImg.complete && bugImg.naturalWidth) {
+          ctx.drawImage(bugImg, ob.x, ob.y, ob.width, ob.height);
+        } else {
+          ctx.fillStyle = '#ef233c';
+          ctx.fillRect(ob.x, ob.y, ob.width, ob.height);
+        }
+      }
+    }
+
+    // Update player
+    function updatePlayer() {
+      player.velocityY += player.gravity;
+      player.y += player.velocityY;
+
+      if (player.y >= 150) {
+        player.y = 150;
+        player.velocityY = 0;
+        player.grounded = true;
+      }
+    }
+
+    // Spawn obstacle
+    function spawnObstacle() {
+      obstacles.push({
+        x: LOGICAL_WIDTH,
+        y: 160,
+        width: 20,
+        height: 20,
+        speed: gameSpeed + Math.random() * 1.2,
+        scored: false
+      });
+    }
+
+    // Update obstacles with padded collision
+    function updateObstacles() {
+      for (let i = 0; i < obstacles.length; i++) {
+        const ob = obstacles[i];
+        ob.x -= ob.speed;
+
+        // Score when obstacle passes player
+        if (!ob.scored && ob.x + ob.width < player.x) {
+          score++;
+          ob.scored = true;
+          if (score > highScore) {
+            highScore = score;
+            highScoreEl.textContent = highScore;
+            try { localStorage.setItem('itpowers_highscore', String(highScore)); } catch(e){}
+          }
+          hudScore.textContent = score;
+        }
+
+        // Collision detection (with padding)
+        if (
+          player.x + HIT_PAD.x < ob.x + ob.width &&
+          player.x + player.width - HIT_PAD.x > ob.x &&
+          player.y + HIT_PAD.y < ob.y + ob.height &&
+          player.y + player.height - HIT_PAD.y > ob.y
+        ) {
+          endGame();
+          return;
+        }
+      }
+
+      obstacles = obstacles.filter(o => o.x + o.width > -50);
+    }
+
+    // UI drawing
+    function drawScore() {
+      ctx.font = "16px 'Press Start 2P', monospace";
+      ctx.fillStyle = "#222";
+      ctx.fillText(`Score: ${score}`, 8, 18);
+    }
+
+    function drawIntroScreen() {
+      ctx.clearRect(0, 0, LOGICAL_WIDTH, LOGICAL_HEIGHT);
+      ctx.font = "20px 'Press Start 2P', monospace";
+      ctx.fillStyle = "#4e54c8";
+      ctx.textAlign = "center";
+      ctx.fillText("THE DEBUG RUN", LOGICAL_WIDTH / 2, 80);
+
+      ctx.font = "12px 'Press Start 2P', monospace";
+      ctx.fillStyle = "#333";
+      ctx.fillText("Press SPACE to Start", LOGICAL_WIDTH / 2, 130);
+    }
+
+    function showGameOver() {
+      gameOverScreen.classList.add('show');
+      gameOverScreen.setAttribute('aria-hidden', 'false');
+    }
+
+    function hideGameOver() {
+      gameOverScreen.classList.remove('show');
+      gameOverScreen.setAttribute('aria-hidden', 'true');
+    }
+
+    // Game flow
+    function endGame() {
+      if (gameLoopId) cancelAnimationFrame(gameLoopId);
+      gameLoopId = null;
+      currentState = STATE.GAME_OVER;
+      if (score > highScore) highScore = score;
+      finalScoreEl.textContent = score;
+      highScoreEl.textContent = highScore;
+      hudScore.textContent = score;
+      try { localStorage.setItem('itpowers_highscore', String(highScore)); } catch(e){}
+      showGameOver();
+    }
+
+    function gameLoop() {
+      if (currentState !== STATE.PLAYING) return;
+
+      ctx.clearRect(0, 0, LOGICAL_WIDTH, LOGICAL_HEIGHT);
+
+      gameSpeed = Math.min(MAX_GAME_SPEED, gameSpeed + SPEED_INCREASE_RATE);
+
+      updatePlayer();
+      drawPlayer();
+
+      frameCount++;
+      if (frameCount % 90 === 0) spawnObstacle();
+
+      updateObstacles();
+      drawObstacles();
+      drawScore();
+
+      gameLoopId = requestAnimationFrame(gameLoop);
+    }
+
+    function startGame() {
+      resizeCanvasForDPR();
+      score = 0;
+      frameCount = 0;
+      obstacles = [];
+      player.y = 150;
+      player.velocityY = 0;
+      player.grounded = true;
+      gameSpeed = 2.5;
+      currentState = STATE.PLAYING;
+      hideGameOver();
+      hudScore.textContent = score;
+      if (gameLoopId) cancelAnimationFrame(gameLoopId);
+      gameLoopId = requestAnimationFrame(gameLoop);
+    }
+
+    function restartGame() {
+      if (gameLoopId) cancelAnimationFrame(gameLoopId);
+      startGame();
+    }
+
+    // Controls: keyboard + touch + on-screen button
+    // Prevent default page scroll for Space and touch when interacting with the game
+    document.addEventListener('keydown', e => {
+      if (e.code === 'Space') {
+        e.preventDefault();
+        if (currentState === STATE.INTRO) startGame();
+        else if (currentState === STATE.PLAYING && player.grounded) {
+          player.velocityY = player.jumpPower;
+          player.grounded = false;
+        } else if (currentState === STATE.GAME_OVER) restartGame();
+      }
+    }, { passive: false });
+
+    // Create on-screen touch button for mobile
+    function createTouchButtonIfNeeded() {
+      // only create once
+      if (document.getElementById('touchJumpBtn')) return;
+      const btn = document.createElement('button');
+      btn.id = 'touchJumpBtn';
+      btn.className = 'touch-btn';
+      btn.textContent = 'Jump';
+      btn.setAttribute('aria-label', 'Jump');
+      // append inside .game-section so button sits above canvas
+      const container = document.querySelector('.game-section');
+      container.appendChild(btn);
+
+      btn.addEventListener('pointerdown', e => {
+        e.preventDefault();
+        if (currentState === STATE.INTRO) startGame();
+        else if (currentState === STATE.PLAYING && player.grounded) {
+          player.velocityY = player.jumpPower;
+          player.grounded = false;
+        } else if (currentState === STATE.GAME_OVER) restartGame();
+      }, { passive: false });
+    }
+
+    // Prevent page from scrolling on canvas touch (while playing)
+    canvas.addEventListener('touchstart', e => {
+      e.preventDefault();
+    }, { passive: false });
+
+    // Restart button handler
+    restartBtn.addEventListener('click', restartGame);
+
+    // Load high score from localStorage (safe try/catch)
+    try {
+      const saved = localStorage.getItem('itpowers_highscore');
+      if (saved) highScore = Number(saved) || 0;
+    } catch (e) { highScore = 0; }
+    highScoreEl.textContent = highScore;
+
+    // Initialize: load images (with fallback timeout) then show intro and create touch button
+    Promise.race([
+      Promise.all([loadImage(playerImg), loadImage(bugImg)]),
+      new Promise(resolve => setTimeout(resolve, 1750))
+    ]).then(() => {
+      resizeCanvasForDPR();
+      drawIntroScreen();
+      hudScore.textContent = score;
+      highScoreEl.textContent = highScore;
+      // create touch button for pointer devices (mobile)
+      createTouchButtonIfNeeded();
+    });
+
+    // Small enhancement: allow clicking canvas to act as jump on pointer devices
+    canvas.addEventListener('pointerdown', e => {
+      e.preventDefault();
+      if (currentState === STATE.INTRO) startGame();
+      else if (currentState === STATE.PLAYING && player.grounded) {
+        player.velocityY = player.jumpPower;
+        player.grounded = false;
+      } else if (currentState === STATE.GAME_OVER) restartGame();
+    }, { passive: false });
+
+  </script>
+
+</body>
+</html>
